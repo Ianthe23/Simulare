@@ -21,13 +21,8 @@ class OperatiiMobilierFile:
             for line in lines:
                 if line == "\n":
                     break
-                cod, tip, nume, stock, pret = [elem.strip() for elem in line.split(',')]
+                cod, tip, nume, stock, pret = [elem.strip() for elem in line.split(",")]
                 mobilier = Mobilier(cod, tip, nume, int(stock), float(pret))
-
-                for mobila in self.__mobilier:
-                    if mobila.getCod() == mobilier.getCod():
-                        raise ValueError(colored("Exista 2 sau mai multe piese de mobilier cu acelasi cod!", "red"))
-                    
                 self.__mobilier.append(mobilier)
         
     def __save_to_file(self):
@@ -45,7 +40,7 @@ class OperatiiMobilierFile:
         """
         toate_dupa_tip = []
         for mobilier in self.__mobilier:
-            if mobilier.getTip() == tip:
+            if mobilier.getTip() == tip and mobilier.getStock() > 0:
                 toate_dupa_tip.append([mobilier.getCod(), mobilier.getTip(), mobilier.getNume(), int(mobilier.getStock()), float(mobilier.getPret())])
         if toate_dupa_tip == []:
             raise ValueError(colored("Nu exista niciun mobilier cu acest tip!", "red"))
@@ -68,7 +63,7 @@ class OperatiiMobilierFile:
                 break
             cnt += 1
         if ok == 1:
-            raise ValueError(colored("Nu exista acest cod in lista de mobiliere!", "red"))
+            raise ValueError(colored("Nu exista acest cod in lista de mobiliere ori nu sunt suficiente piese in stock!", "red"))
         self.__save_to_file()
         return mobila
         

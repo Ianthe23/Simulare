@@ -24,7 +24,7 @@ class Console:
         try:
             tip = input("Introduceti tipul piesei de cautat: ")
             lista = self.__srv.search_tip(tip)
-            underlined_string = "    " + "\033[4m" + "Mobiliere cu acelasi tip sunt:" + "\033[0m"
+            underlined_string = "    " + "\033[4m" + "Mobiliere cu acelasi tip in stock sunt:" + "\033[0m"
 
             print("\n")
             print(colored(underlined_string, "red"))
@@ -52,8 +52,8 @@ class Console:
         try:
             cod = input("Introduceti codul mobilierului: ")
             numar = int(input("Introduceti numarul de piese: "))
-            print("\n")
             mobilier = self.__srv.buy(cod, numar)
+            print("\n")
             print("Mobilierul este:\n")
             print(colored("nume: ", "blue"), end = " ")
             print(mobilier[0], end = "  ")
@@ -72,10 +72,11 @@ class Console:
         return self.__srv.get_all()
     
     def show_ui(self):
-        print("Bine ati venit la firma noastra de mobila!\n")
+        print("\nBine ati venit la firma noastra de mobila!")
 
         exit = False
         while not exit:
+            print("\n")
             print("Lista de mobila: ", self.show_all())
             print("\n")
 

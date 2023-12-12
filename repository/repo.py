@@ -23,6 +23,11 @@ class OperatiiMobilierFile:
                     break
                 cod, tip, nume, stock, pret = [elem.strip() for elem in line.split(',')]
                 mobilier = Mobilier(cod, tip, nume, int(stock), float(pret))
+
+                for mobila in self.__mobilier:
+                    if mobila.getCod() == mobilier.getCod():
+                        raise ValueError(colored("Exista 2 sau mai multe piese de mobilier cu acelasi cod!", "red"))
+                    
                 self.__mobilier.append(mobilier)
         
     def __save_to_file(self):
